@@ -9,7 +9,12 @@ RUN npm install
 # .dockerignore 에 있는 폴더, 파일은 컨테이너 내부로 복사되지 않음
 COPY . /APP
 
-EXPOSE 80
+# layer 기반이라 npm install 같이 불필요한 작업 뒤에서 선언 하는게 좋음
+ARG DEFAULT_PORT=80
+
+ENV PORT $DEFAULT_PORT
+
+EXPOSE $PORT
 
 #VOLUME ["/APP/node_modules"]
 
